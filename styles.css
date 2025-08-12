@@ -1,0 +1,275 @@
+/* Base setup */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  /* Readex Pro: خوانایی بالا برای متن؛ Cairo Play: عنوان‌های دوستانه/بچگانه؛ Vazirmatn: fallback فارسی کامل */
+  font-family: "Readex Pro", "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background-color: #ffffff; /* no gradients per requirement */
+  color: #0f172a;
+  min-height: 100dvh;
+  touch-action: manipulation;
+}
+
+body[data-theme="dark"] {
+  background-color: #0b0f1a; /* solid, no gradient */
+  color: #e5e7eb;
+}
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --muted: #475569;
+  --primary: #111827;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+body[data-theme="dark"] {
+  --glass-bg: rgba(12, 16, 27, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --muted: #93a4b7;
+  --primary: #f1f5f9;
+  --card-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  box-shadow: var(--card-shadow);
+  border-radius: 16px;
+}
+
+#app-root {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+}
+
+.app-header, .app-footer {
+  margin: 12px;
+  padding: 16px 20px;
+}
+
+.app-footer {
+  text-align: center;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand .logo {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+}
+
+.brand .logo img {
+  width: 32px;
+  height: 32px;
+}
+
+.brand .titles h1 {
+  font-size: 20px;
+  margin: 0 0 4px 0;
+  font-family: "Cairo Play", "Readex Pro", "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.brand .titles p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  cursor: pointer;
+  border: 1px solid var(--glass-border);
+  background: transparent;
+  color: inherit;
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+.icon-btn:hover {
+  background: rgba(127, 127, 127, 0.08);
+}
+
+.container {
+  padding: 8px 12px 16px;
+}
+
+.view { display: none; }
+.view.active { display: block; }
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.story-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+}
+
+.story-thumb {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  padding: 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.story-body {
+  padding: 12px 14px 14px;
+}
+
+.story-title {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-family: "Cairo Play", "Readex Pro", "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.story-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.player {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 16px;
+  padding: 16px;
+}
+
+.player-media img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.player-content h2 {
+  margin-top: 0;
+  font-family: "Cairo Play", "Readex Pro", "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.node-text { line-height: 2; font-size: 16px; color: var(--primary); font-family: "Readex Pro", "Vazirmatn", system-ui; }
+.node-text p { margin: 0 0 12px 0; }
+
+.choices {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.choice-btn, .back-btn, .primary-btn, .secondary-btn {
+  cursor: pointer;
+  border: 1px solid var(--glass-border);
+  background: rgba(127,127,127,0.06);
+  color: inherit;
+  padding: 10px 12px;
+  border-radius: 12px;
+  transition: background 120ms ease;
+  font-family: "Cairo Play", "Readex Pro", "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-weight: 600;
+  font-size: 15.5px;
+  line-height: 1.2;
+}
+
+.choice-btn:hover, .back-btn:hover, .primary-btn:hover, .secondary-btn:hover {
+  background: rgba(127,127,127,0.12);
+}
+
+.back-btn { margin: 0 0 12px 0; }
+
+.actions-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* در حالت تاریک تصاویر دست‌نخورده بمانند */
+body[data-theme="dark"] img.themable {
+  filter: none;
+}
+
+@media (max-width: 860px) {
+  .player {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* دکمه نصب PWA */
+.install-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-family: 'Cairo Play', 'Vazirmatn', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.install-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* استایل برای حالت آفلاین */
+.offline .header {
+  background: linear-gradient(135deg, #ff6b6b, #ffa726);
+  position: relative;
+}
+
+.offline .header::after {
+  content: "📵 حالت آفلاین";
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  color: white;
+}
+
+

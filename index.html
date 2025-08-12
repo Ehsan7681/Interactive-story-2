@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>داستان تعاملی</title>
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="assets/images/story1.svg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
+    <link rel="apple-touch-icon" href="assets/images/story1.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@400;600;700&family=Readex+Pro:wght@300;400;500;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app-root">
+      <header class="app-header glass">
+        <div class="brand">
+          <div class="logo">
+            <img src="assets/images/logo.png" alt="لوگو" />
+          </div>
+          <div class="titles">
+            <h1>داستان تعاملی</h1>
+            <p>۲۰ داستان تعاملی با پایان‌های متفاوت</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="theme-toggle" class="icon-btn" aria-label="تغییر حالت روشن/تاریک">
+            <span class="icon">🌙</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="container">
+        <section id="stories-view" class="view active">
+          <div class="stories-grid" id="stories-grid"></div>
+        </section>
+
+        <section id="player-view" class="view">
+          <button class="back-btn" id="back-to-stories">بازگشت</button>
+          <div class="player glass">
+            <div class="player-media">
+              <img id="story-image" alt="تصویر داستان" />
+            </div>
+            <div class="player-content">
+              <h2 id="story-title"></h2>
+              <p id="node-text" class="node-text"></p>
+              <div id="choices" class="choices"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer glass">
+        <small>ایده و تولید: احسان شمسی</small>
+      </footer>
+    </div>
+
+    <script src="data/stories.js"></script>
+    <script src="app.js"></script>
+  </body>
+  </html>
+
+
