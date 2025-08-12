@@ -14,6 +14,9 @@
 
   let currentStory = null;
   let currentNodeId = null;
+  // حفظ موقعیت اسکرول و آخرین داستان باز شده برای بازگشت روی همان کارت
+  let lastScrollY = 0;
+  let lastStoryId = null;
 
   function attachImageFallback(imgElement) {
     if (!imgElement || imgElement.__fallbackAttached) return;
@@ -50,6 +53,7 @@
     card.tabIndex = 0;
     card.setAttribute('role', 'button');
     card.setAttribute('aria-label', `شروع ${story.title}`);
+    card.dataset.id = story.id;
 
     const img = document.createElement('img');
     img.src = story.image;
@@ -86,6 +90,10 @@
   }
 
   function openStory(storyId) {
+    // ذخیره موقعیت اسکرول و شناسه کارت برای بازگشت
+    lastScrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    lastStoryId = storyId;
+
     currentStory = STORIES.find((s) => s.id === storyId);
     if (!currentStory) return;
     currentNodeId = 'start';
@@ -145,6 +153,22 @@
   function goHome() {
     playerView.classList.remove('active');
     storiesView.classList.add('active');
+    const restoreY = lastScrollY;
+    const restoreId = lastStoryId;
+    // بعد از نمایان شدن لیست، اسکرول بازگردانده و روی همان کارت فوکوس شود
+    requestAnimationFrame(() => {
+      window.scrollTo(0, restoreY || 0);
+      if (restoreId) {
+        const card = document.querySelector(`.story-card[data-id="${restoreId}"]`);
+        if (card) {
+          // جلوگیری از اسکرول اضافه هنگام فوکوس
+          if (typeof card.focus === 'function') {
+            try { card.focus({ preventScroll: true }); } catch (e) { card.focus(); }
+          }
+        }
+      }
+    });
+
     currentStory = null;
     currentNodeId = null;
   }
