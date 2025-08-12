@@ -10,23 +10,29 @@ html, body {
 
 body {
   /* Readex Pro: خوانایی بالا برای متن؛ Cairo Play: عنوان‌های دوستانه/بچگانه؛ Vazirmatn: fallback فارسی کامل */
-  font-family: "Readex Pro", "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-  background-color: #ffffff; /* no gradients per requirement */
-  color: #0f172a;
+  font-family: "Readex Pro", "Vazirmatn", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif;
+  background-color: #ffffff !important; /* no gradients per requirement */
+  color: #0f172a !important;
   min-height: 100dvh;
   touch-action: manipulation;
+  /* بهبود نمایش فونت در iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* اطمینان از استایل‌دهی صحیح */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body[data-theme="dark"] {
-  background-color: #0b0f1a; /* solid, no gradient */
-  color: #e5e7eb;
+  background-color: #0b0f1a !important; /* solid, no gradient */
+  color: #e5e7eb !important;
 }
 
 :root {
   --glass-bg: rgba(255, 255, 255, 0.55);
   --glass-border: rgba(255, 255, 255, 0.45);
   --muted: #475569;
-  --primary: #111827;
+  --primary: #111827 !important;
   --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
@@ -34,7 +40,7 @@ body[data-theme="dark"] {
   --glass-bg: rgba(12, 16, 27, 0.55);
   --glass-border: rgba(255, 255, 255, 0.08);
   --muted: #93a4b7;
-  --primary: #f1f5f9;
+  --primary: #f1f5f9 !important;
   --card-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
@@ -186,8 +192,23 @@ body[data-theme="dark"] {
   font-family: "Cairo Play", "Readex Pro", "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, Arial;
 }
 
-.node-text { line-height: 2; font-size: 16px; color: var(--primary); font-family: "Readex Pro", "Vazirmatn", system-ui; }
-.node-text p { margin: 0 0 12px 0; }
+.node-text { 
+  line-height: 2; 
+  font-size: 16px; 
+  color: var(--primary) !important; 
+  font-family: "Readex Pro", "Vazirmatn", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* بهبود نمایش در iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+.node-text p { 
+  margin: 0 0 12px 0; 
+  color: inherit !important;
+}
 
 .choices {
   display: grid;
@@ -270,6 +291,36 @@ body[data-theme="dark"] img.themable {
   border-radius: 15px;
   font-size: 0.8rem;
   color: white;
+}
+
+/* اصلاحات خاص برای iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .node-text {
+    /* اطمینان از نمایش صحیح فونت در iOS */
+    font-feature-settings: "liga" off;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  body {
+    /* جلوگیری از zoom خودکار در iOS */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* اطمینان از رنگ‌های درست در تغییر تم */
+  body * {
+    transition: color 0.3s ease !important;
+  }
+  
+  body[data-theme="dark"] .node-text {
+    color: #f1f5f9 !important;
+  }
+  
+  body[data-theme="light"] .node-text,
+  body:not([data-theme="dark"]) .node-text {
+    color: #111827 !important;
+  }
 }
 
 
